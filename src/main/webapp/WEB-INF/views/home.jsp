@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
@@ -55,7 +56,7 @@
 				<a id="byMethod" class="textLink" href="<c:url value="/mapping/method" />">By path and method</a>
 			</li>
 			<li>
-				<a id="byParameter" class="textLink" href="<c:url value="/mapping/parameter?foo=bar" />">By path, method, and presence of parameter</a>
+				<a id="byParameter" class="textLink" href="<c:url value="/mapping/parameter?Foo=bar" />">By path, method, and presence of parameter</a>
 			</li>
 			<li>
 				<a id="byNotParameter" class="textLink" href="<c:url value="/mapping/parameter" />">By path, method, and not presence of parameter</a>
@@ -92,13 +93,13 @@
 		</p>
 		<ul>
 			<li>
-				<a id="param" class="textLink" href="<c:url value="/data/param?foo=bar" />">Query parameter</a>
+				<a id="param" class="textLink" href="<c:url value="/data/param" />">Query parameter</a>
 			</li>
 			<li>
 				<a id="group" class="textLink" href="<c:url value="/data/group?param=test&param1=foo&param2=bar&param3=baz" />">Group of query parameters</a>
 			</li>
 			<li>
-				<a id="var" class="textLink" href="<c:url value="/data/path/foo" />">Path variable</a>
+				<a id="var" class="textLink" href="<c:url value="/data/path/fo.sd.ds.sdfa" />">Path variable</a>
 			</li>
 			<li>
 				<a id="matrixVar" class="textLink" href="<c:url value="/data/matrixvars;foo=bar/simple" />">Matrix variable</a>
@@ -506,7 +507,7 @@ $(document).ready(function() {
 	$("form.textForm").submit(function(event) {
 		var form = $(this);
 		var button = form.children(":first");
-		$.ajax({ type: "POST", url: form.attr("action"), data: "foo", contentType: "text/plain", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
+		$.ajax({ type: "POST", url: form.attr("action"), data: "我是谁", contentType: "text/plain;charset=UTF-8", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
 		return false;
 	});
 
@@ -553,7 +554,7 @@ $(document).ready(function() {
 		var button = form.children(":first");
 		var data = form.hasClass("invalid") ?
 				"{ \"foo\": \"bar\" }" : 
-				"{ \"foo\": \"bar\", \"fruit\": \"apple\" }";
+				"{ \"foo\": \"bar2\", \"fruit\": \"apple2\" }";
 		$.ajax({ type: "POST", url: form.attr("action"), data: data, contentType: "application/json", dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
 		return false;
 	});
@@ -623,7 +624,7 @@ $(document).ready(function() {
 
 	$("#byHeader").click(function(){
 		var link = $(this);
-		$.ajax({ url: this.href, dataType: "text", beforeSend: function(req) { req.setRequestHeader("FooHeader", "foo"); }, success: function(form) { MvcUtil.showSuccessResponse(form, link); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, link); }});
+		$.ajax({ url: this.href, dataType: "text", beforeSend: function(req) { req.setRequestHeader("fooHeader", "foo"); }, success: function(form) { MvcUtil.showSuccessResponse(form, link); }, error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, link); }});
 		return false;
 	});
 

@@ -17,6 +17,12 @@ public class MappingController {
 		return "Mapped by path!";
 	}
 
+	/**
+	 * 支持这种格式：/mapping/path/123
+	 * 不支持：/mapping/path/123/121(这个被 value="/mapping/path/**" 支持)
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/mapping/path/*", method=RequestMethod.GET)
 	public @ResponseBody String byPathPattern(HttpServletRequest request) {
 		return "Mapped by path pattern ('" + request.getRequestURI() + "')";
@@ -27,16 +33,28 @@ public class MappingController {
 		return "Mapped by path + method";
 	}
 
+	/**
+	 * request中必须包含foo参数，参数名不区分大小写
+	 * @return
+	 */
 	@RequestMapping(value="/mapping/parameter", method=RequestMethod.GET, params="foo")
 	public @ResponseBody String byParameter() {
 		return "Mapped by path + method + presence of query parameter!";
 	}
 
+	/**
+	 * request中必须不包含foo参数，参数名不区分大小写
+	 * @return
+	 */
 	@RequestMapping(value="/mapping/parameter", method=RequestMethod.GET, params="!foo")
 	public @ResponseBody String byParameterNegation() {
 		return "Mapped by path + method + not presence of query parameter!";
 	}
 
+	/**
+	 * request header中必须包含参数键值对：FooHeader=foo，参数名不区分大小写
+	 * @return
+	 */
 	@RequestMapping(value="/mapping/header", method=RequestMethod.GET, headers="FooHeader=foo")
 	public @ResponseBody String byHeader() {
 		return "Mapped by path + method + presence of header!";
@@ -48,7 +66,9 @@ public class MappingController {
 	}
 
 	/**
-	 * request中只能包含javaBean中属性的参数，不能包含多余的参数，否则会报错。
+	 * request中只能包含javaBean中属性的参数，不能包含多余的参数，否则会报404错。
+	 * 去掉@RequestBody注释则不会报错
+	 * consumes=MediaType.APPLICATION_JSON_VALUE 代表客户端请求时：contentType: "application/json"
 	 * @param javaBean
 	 * @return
 	 */
