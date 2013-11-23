@@ -319,7 +319,7 @@
 				<a id="valueObject" class="textLink" href="<c:url value="/convert/value?value=123456789" />">Custom Value Object</a>
 			</li>
 			<li>
-				<a id="customConverter" class="textLink" href="<c:url value="/convert/custom?value=123-45-6789" />">Custom Converter</a>
+				<a id="customConverter" class="textLink" href="<c:url value="/convert/custom?value=123-bb-6789" />">Custom Converter</a>
 			</li>		
 		</ul>
 		<div id="convert-bean">
