@@ -11,6 +11,19 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven conversion-service="conversionService">
+		<!-- 解决ResponeseBody的json中文乱码 （因为StringHttpMessageConverter默认字符集是ISO8859-1所以。。。）-->  
+	    <message-converters>  
+	        <beans:bean  
+	            class="org.springframework.http.converter.StringHttpMessageConverter">  
+	            <beans:property name="supportedMediaTypes">  
+	                <beans:list>  
+	                    <beans:value>  
+	                        text/plain;charset=UTF-8  
+	                    </beans:value>  
+	                </beans:list>  
+	            </beans:property>  
+	        </beans:bean>  
+	    </message-converters>  
 		<argument-resolvers>
 			<beans:bean class="org.springframework.samples.mvc.data.custom.CustomArgumentResolver"/>
 		</argument-resolvers>
